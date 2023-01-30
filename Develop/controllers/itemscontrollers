@@ -1,0 +1,40 @@
+const express = require("express");
+const router = express.Router();
+const path = require("path");
+const fs = require("fs");
+
+router.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../Develop/public/notes.html"));
+});
+
+router.post("/", (req, res) => {
+  fs.readFile("./db/db.json", "utf-8", (err, data) => {
+    if (err) {
+      res.status(500).send("oh no!");
+      throw err;
+    } else {
+      const itemData = JSON.parse(data);
+      itemData.push(req.body);
+      fs.writeFile(
+        "./friends.json",
+        JSON.stringify(friendsData, null, 4),
+        (err) => {
+          if (err) {
+            res.status(500).send("oh no!");
+            throw err;
+          } else {
+            res.send("data added!");
+          }
+        }
+      );
+    }
+  });
+});
+
+// const friendRoutes = require("./friendsController");
+// router.use("/friends",friendRoutes);
+
+// const petRoutes = require("./petController");
+// router.use("/pets",petRoutes)
+
+module.exports = router;
