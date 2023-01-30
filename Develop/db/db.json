@@ -1,6 +1,14 @@
 [
     {
-        "title":"Test Title",
-        "text":"Test text"
+        "title": "Cleaning",
+        "text": "cleaning the meeting room"
+    },
+    {
+        "title": "Lunch",
+        "text": "Order lunch"
+    },
+    {
+        "title": "PO",
+        "text": "Place purchase order\n"
     }
 ]

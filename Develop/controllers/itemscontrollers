@@ -40,6 +40,32 @@ router.post("/", (req, res) => {
   });
 });
 
+router.delete("/:title", (req, res) => {
+    fs.readFile("./db/db.json", "utf-8", (err, data) => {
+      if (err) {
+        res.status(500).send("Errrr");
+        throw err;
+      } else {
+        let itemData = JSON.parse(data);
+        itemData = itemData.filter((item) => {
+          if (item.title == req.params.title) {
+            return false;
+          } else {
+            return true;
+          }
+        });
+        fs.writeFile("./db/db.json", JSON.stringify(itemData, null, 4), (err) => {
+          if (err) {
+            res.status(500).send("Errrrr");
+            throw err;
+          } else {
+            res.send("data deleted!");
+          }
+        });
+      }
+    });
+  });
+
 // const friendRoutes = require("./friendsController");
 // router.use("/friends",friendRoutes);
 
